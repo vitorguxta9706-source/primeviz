@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PrimeViz | Visualização Arquitetônica</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:#070707;
+color:white;
+overflow-x:hidden;
+}
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#14c9ff;
+border-radius:20px;
+}
+
+header{
+position:fixed;
+top:0;
+width:100%;
+z-index:9999;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.navbar{
+max-width:1400px;
+margin:auto;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+height:65px;
+width:auto;
+}
+
+.menu{
+display:flex;
+align-items:center;
+gap:35px;
+}
+
+.menu a{
+text-decoration:none;
+color:white;
+font-weight:500;
+transition:.3s;
+}
+
+.menu a:hover{
+color:#14c9ff;
+}
+
+.btn{
+background:#14c9ff;
+color:#000 !important;
+padding:14px 28px;
+border-radius:50px;
+font-weight:700;
+transition:.3s;
+text-decoration:none;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 15px 40px rgba(20,201,255,.25);
+}
+
+.hero{
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+to bottom,
+rgba(0,0,0,.45),
+rgba(0,0,0,.8)
+),
+url("https://various-amber-zl8i3uxf.edgeone.app/SKYLINNE%2001.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+transform:scale(1.05);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:900px;
+padding:20px;
+animation:fadeUp 1s ease;
+}
+
+.hero h1{
+font-size:clamp(3rem,8vw,6rem);
+font-weight:900;
+line-height:1;
+margin-bottom:25px;
+}
+
+.hero span{
+color:#14c9ff;
+}
+
+.hero p{
+font-size:1.2rem;
+line-height:1.8;
+opacity:.85;
+margin-bottom:40px;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+section{
+padding:120px 40px;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:70px;
+}
+
+.section-title span{
+color:#14c9ff;
+text-transform:uppercase;
+letter-spacing:3px;
+font-size:.8rem;
+font-weight:700;
+}
+
+.section-title h2{
+font-size:3rem;
+margin-top:10px;
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.service{
+background:#101010;
+padding:40px;
+border-radius:28px;
+border:1px solid rgba(255,255,255,.05);
+transition:.4s;
+}
+
+.service:hover{
+transform:translateY(-10px);
+border-color:#14c9ff;
+}
+
+.service h3{
+font-size:1.5rem;
+margin-bottom:15px;
+}
+
+.service p{
+color:#9f9f9f;
+line-height:1.8;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:25px;
+}
+
+.card{
+overflow:hidden;
+border-radius:30px;
+background:#111;
+position:relative;
+cursor:pointer;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+width:100%;
+height:500px;
+object-fit:cover;
+display:block;
+transition:1s;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.overlay{
+position:absolute;
+bottom:0;
+width:100%;
+padding:35px;
+background:linear-gradient(transparent,rgba(0,0,0,.95));
+}
+
+.overlay h3{
+font-size:1.6rem;
+}
+
+.parallax{
+height:60vh;
+background:
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.45)
+),
+url("https://strange-apricot-kf7xxrhj.edgeone.app/arboreum%2002.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.parallax h2{
+font-size:4rem;
+max-width:900px;
+}
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.testimonial{
+background:#111;
+padding:35px;
+border-radius:24px;
+border:1px solid rgba(255,255,255,.05);
+}
+
+.testimonial p{
+line-height:1.8;
+color:#d4d4d4;
+margin-bottom:20px;
+}
+
+.testimonial h4{
+color:#14c9ff;
+}
+
+.cta{
+background:#14c9ff;
+color:black;
+padding:120px 40px;
+text-align:center;
+}
+
+.cta h2{
+font-size:3.5rem;
+margin-bottom:20px;
+font-weight:900;
+}
+
+.cta p{
+max-width:700px;
+margin:auto;
+margin-bottom:40px;
+font-size:1.1rem;
+line-height:1.8;
+}
+
+.cta a{
+display:inline-block;
+padding:18px 40px;
+background:black;
+color:white;
+text-decoration:none;
+border-radius:50px;
+font-weight:700;
+}
+
+footer{
+padding:50px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.08);
+color:#8f8f8f;
+}
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:none;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:none;
+}
+}
+
+@media(max-width:768px){
+
+.navbar{
+padding:15px 20px;
+}
+
+.menu a:not(.btn){
+display:none;
+}
+
+.hero::before,
+.parallax{
+background-attachment:scroll;
+}
+
+.hero h1{
+font-size:3rem;
+}
+
+.section-title h2{
+font-size:2rem;
+}
+
+.parallax h2{
+font-size:2rem;
+padding:20px;
+}
+
+.cta h2{
+font-size:2.2rem;
+}
+
+.gallery{
+grid-template-columns:1fr;
+}
+
+.card img{
+height:320px;
+}
+
+.logo{
+height:50px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="navbar">
+
+<img
+src="https://prospective-amaranth-ezkybvch.edgeone.app/Fundo%20Transparente%20003.png"
+class="logo"
+alt="PrimeViz">
+
+<div class="menu">
+
+<a href="#servicos">Serviços</a>
+<a href="#portfolio">Portfólio</a>
+<a href="#depoimentos">Depoimentos</a>
+
+<a
+href="https://w.app/kwyiax"
+target="_blank"
+class="btn">
+Solicitar Orçamento
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+Transformamos projetos em
+<span>experiências visuais.</span>
+</h1>
+
+<p>
+Renderizações realistas, modelagem 3D, materiais comerciais e apresentações de alto impacto para empreendimentos imobiliários.
+</p>
+
+<div class="hero-buttons">
+
+<a
+href="https://w.app/kwyiax"
+target="_blank"
+class="btn">
+Solicitar orçamento
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="servicos" class="reveal">
+
+<div class="container">
+
+<div class="section-title">
+<span>Serviços</span>
+<h2>Soluções Visuais Premium</h2>
+</div>
+
+<div class="services">
+
+<div class="service">
+<h3>Renderização 3D</h3>
+<p>Imagens fotorealistas para elevar o valor percebido do seu empreendimento.</p>
+</div>
+
+<div class="service">
+<h3>Modelagem 3D</h3>
+<p>Modelos detalhados para arquitetura, interiores e empreendimentos.</p>
+</div>
+
+<div class="service">
+<h3>Material de Vendas</h3>
+<p>Books, apresentações comerciais, vídeos e conteúdo estratégico para vendas.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="portfolio" class="reveal">
+
+<div class="container">
+
+<div class="section-title">
+<span>Portfólio</span>
+<h2>Projetos Desenvolvidos</h2>
+</div>
+
+<div class="gallery">
+
+<div class="card">
+<img src="https://strange-apricot-kf7xxrhj.edgeone.app/arboreum%2002.png">
+<div class="overlay">
+<h3>Arboreum</h3>
+</div>
+</div>
+
+<div class="card">
+<img src="https://nutty-peach-p59ywfhu.edgeone.app/04.jpeg">
+<div class="overlay">
+<h3>Interior Premium</h3>
+</div>
+</div>
+
+<div class="card">
+<img src="https://unfortunate-plum-cp2oavua.edgeone.app/02.png">
+<div class="overlay">
+<h3>Projeto Comercial</h3>
+</div>
+</div>
+
+<div class="card">
+<img src="https://massive-chocolate-jvxip1za.edgeone.app/04.png">
+<div class="overlay">
+<h3>Empreendimento</h3>
+</div>
+</div>
+
+<div class="card">
+<img src="https://ethnic-cyan-qrs69dy4.edgeone.app/imagem%2002.png">
+<div class="overlay">
+<h3>Visualização Externa</h3>
+</div>
+</div>
+
+<div class="card">
+<img src="https://various-amber-zl8i3uxf.edgeone.app/SKYLINNE%2001.png">
+<div class="overlay">
+<h3>Skylinne</h3>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="parallax">
+<h2>Imagens que vendem antes mesmo da obra começar.</h2>
+</section>
+
+<section id="depoimentos" class="reveal">
+
+<div class="container">
+
+<div class="section-title">
+<span>Depoimentos</span>
+<h2>O que nossos clientes dizem</h2>
+</div>
+
+<div class="testimonials">
+
+<div class="testimonial">
+<p>
+"A qualidade dos renders superou nossas expectativas e agregou muito valor à apresentação do empreendimento."
+</p>
+<h4>Construtora Parceira</h4>
+</div>
+
+<div class="testimonial">
+<p>
+"Conseguimos transmitir exatamente a experiência do projeto para nossos clientes."
+</p>
+<h4>Escritório de Arquitetura</h4>
+</div>
+
+<div class="testimonial">
+<p>
+"Material impecável, entrega rápida e visual extremamente profissional."
+</p>
+<h4>Incorporadora</h4>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<h2>
+Seu próximo empreendimento merece uma apresentação memorável.
+</h2>
+
+<p>
+Entre em contato agora e descubra como a PrimeViz pode elevar o nível da apresentação dos seus projetos.
+</p>
+
+<a href="https://w.app/kwyiax" target="_blank">
+Falar no WhatsApp
+</a>
+
+</section>
+
+<footer>
+
+<p>© 2026 PrimeViz • Visualização Arquitetônica</p>
+<p>@prime.viz</p>
+
+</footer>
+
+<script>
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add("active");
+}
+
+});
+
+});
+
+document.querySelectorAll(".reveal").forEach(el=>{
+observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>
